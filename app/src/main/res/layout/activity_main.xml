@@ -4,37 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bitplasma.app.ayush_demo.MainActivity">
+    tools:context="com.bitplasma.app.ayush_demo.MainActivity"
+    tools:layout_editor_absoluteY="25dp">
 
     <Button
         android:id="@+id/barcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="21dp"
-        android:layout_marginStart="48dp"
+        android:layout_width="133dp"
+        android:layout_height="133dp"
+        android:layout_marginBottom="42dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="27dp"
         android:layout_marginTop="64dp"
         android:text="Barcode"
+        app:layout_constraintBottom_toTopOf="@+id/calculator"
         app:layout_constraintEnd_toStartOf="@+id/voice"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/voice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_width="133dp"
+        android:layout_height="133dp"
+        android:layout_marginBottom="67dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginTop="90dp"
         android:text="Voice Search"
-        app:layout_constraintBottom_toBottomOf="@+id/barcode"
+        app:layout_constraintBottom_toTopOf="@+id/calculator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/barcode"
-        app:layout_constraintTop_toTopOf="@+id/barcode" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/calculator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_width="133dp"
+        android:layout_height="133dp"
+        android:layout_marginBottom="144dp"
         android:text="Calculator"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"

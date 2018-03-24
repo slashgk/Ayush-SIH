@@ -41,12 +41,12 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
         setContentView(R.layout.activity_barcode_scan);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        String barcode= getIntent().getStringExtra("barcode");
         result = (TextView) findViewById(R.id.barcodeResult);
        // final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assertNotNull(result);
        // assertNotNull(fab);
-        startScan();
-
+        networkCall(barcode);
         if(savedInstanceState != null){
             Barcode restoredBarcode = savedInstanceState.getParcelable(BARCODE_KEY);
             if(restoredBarcode != null){
@@ -55,6 +55,12 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
             }
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     public void networkCall(String barcodeValue){
         Log.i(LOG_TAG,"TEST: networkCall");
         ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -80,56 +86,13 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
         }
     }
 
-
-    private void startScan() {
-        /**
-         * Build a new MaterialBarcodeScanner
-         */
-        final MaterialBarcodeScanner materialBarcodeScanner = new MaterialBarcodeScannerBuilder()
-                .withActivity(BarcodeScan.this)
-                .withEnableAutoFocus(true)
-                .withBleepEnabled(true)
-                .withBackfacingCamera()
-                .withCenterTracker()
-                .withText("Scanning...")
-                .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
-                    @Override
-                    public void onResult(Barcode barcode) {
-                        networkCall("");
-                        barcodeResult = barcode;
-                        result.setText(barcode.rawValue);
-                    }
-                })
-                .build();
-        materialBarcodeScanner.startScan();
-    }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelable(BARCODE_KEY, barcodeResult);
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode != MaterialBarcodeScanner.RC_HANDLE_CAMERA_PERM) {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-            return;
-        }
-        if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            startScan();
-            return;
-        }
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        };
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Error")
-                .setMessage(R.string.no_camera_permission)
-                .setPositiveButton(android.R.string.ok, listener)
-                .show();
-    }
+
 
     @Override
     public Loader<Ayurveda> onCreateLoader(int i, Bundle bundle) {

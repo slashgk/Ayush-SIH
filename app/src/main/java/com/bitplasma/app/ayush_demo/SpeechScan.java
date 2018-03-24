@@ -11,17 +11,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.zagum.speechrecognitionview.RecognitionProgressView;
 import com.github.zagum.speechrecognitionview.adapters.RecognitionListenerAdapter;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class SpeechScan extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final int REQUEST_RECORD_AUDIO_PERMISSION_CODE = 1;
-
+    EditText otext;
+    TextView ctext;
     private SpeechRecognizer speechRecognizer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,9 @@ public class SpeechScan extends AppCompatActivity {
         recognitionProgressView.setIdleStateAmplitudeInDp(2);
         recognitionProgressView.setRotationRadiusInDp(10);
         recognitionProgressView.play();
+
+        otext=(EditText) findViewById(R.id.text);
+        ctext=(TextView) findViewById(R.id.ctext);
 
         Button listen = (Button) findViewById(R.id.listen);
         Button reset = (Button) findViewById(R.id.reset);
@@ -105,7 +113,7 @@ public class SpeechScan extends AppCompatActivity {
     private void showResults(Bundle results) {
         ArrayList<String> matches = results
                 .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-        Toast.makeText(this, matches.get(0), Toast.LENGTH_LONG).show();
+        otext.setText(matches.get(0));
     }
 
     private void requestPermission() {
