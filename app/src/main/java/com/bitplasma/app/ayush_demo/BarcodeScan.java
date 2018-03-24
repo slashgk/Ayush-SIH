@@ -13,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
     private static final String AYUSH_REQUEST_URL =
             "https://jsonplaceholder.typicode.com/posts/1";
     private Barcode barcodeResult;
-
+    public static final String LOG_TAG = BarcodeScan.class.getName();
     private TextView result;
 
     @Override
@@ -41,29 +42,26 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         result = (TextView) findViewById(R.id.barcodeResult);
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       // final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assertNotNull(result);
-        assertNotNull(fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startScan();
-            }
-        });
+       // assertNotNull(fab);
+        startScan();
+
         if(savedInstanceState != null){
             Barcode restoredBarcode = savedInstanceState.getParcelable(BARCODE_KEY);
             if(restoredBarcode != null){
                 result.setText(restoredBarcode.rawValue);
                 barcodeResult = restoredBarcode;
-                networkCall(restoredBarcode.rawValue);
             }
         }
     }
     public void networkCall(String barcodeValue){
+        Log.i(LOG_TAG,"TEST: networkCall");
         ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
+            Log.i(LOG_TAG,"TEST: Network available");
             // Get a reference to the LoaderManager, in order to interact with loaders.
             LoaderManager loaderManager = getLoaderManager();
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
@@ -97,6 +95,7 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
                 .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
                     @Override
                     public void onResult(Barcode barcode) {
+                        networkCall("");
                         barcodeResult = barcode;
                         result.setText(barcode.rawValue);
                     }
@@ -142,7 +141,7 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
         if (ayurveda != null) {
-            result.setText(ayurveda.toString());
+            result.setText(ayurveda.getmTitle());
         }
         else
             result.setText("No details");

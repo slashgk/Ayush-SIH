@@ -12,6 +12,7 @@ import java.util.List;
 
 public class AyurvedaLoader extends AsyncTaskLoader<Ayurveda> {
     private String mUrl;
+    public static final String LOG_TAG = AyurvedaLoader.class.getName();
 
     public AyurvedaLoader(Context context, String url) {
         super(context);
@@ -20,19 +21,19 @@ public class AyurvedaLoader extends AsyncTaskLoader<Ayurveda> {
 
     @Override
     protected void onStartLoading() {
-        //Log.i(LOG_TAG,"TEST: onStartLoading called");
+        Log.i(LOG_TAG,"TEST: onStartLoading called");
         forceLoad();
     }
 
     @Override
     public Ayurveda loadInBackground() {
-        //Log.i(LOG_TAG,"TEST: loadInBackground called");
+        Log.i(LOG_TAG,"TEST: loadInBackground called");
         if (mUrl == null) {
             return null;
         }
 
         // Perform the network request, parse the response, and extract a list of earthquakes.
-        Ayurveda ayurvedas = QueryUtils.AyurvedaData(mUrl);
+        Ayurveda ayurvedas = QueryUtils.fetchAyurvedaData(mUrl);
         return ayurvedas;
     }
 }
