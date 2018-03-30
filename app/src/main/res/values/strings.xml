@@ -26,5 +26,40 @@
         <item>AYANA</item>
         <item>SAMVATSARA</item>
         <item>YUGA</item>
+        <item>SECOND</item>
+        <item>MINUTES</item>
+        <item>HOUR</item>
+        <item>DAY</item>
+        <item>MONTH</item>
+        <item>YEAR</item>
+    </string-array>
+    <string-array name="length_array">
+        <item>YAVODARA</item>
+        <item>ANGULA</item>
+        <item>BITAHASTI</item>
+        <item>ARATNI</item>
+        <item>HASTA</item>
+        <item>RAJAHASTA(NRIPAHASTA)</item>
+        <item>VYAMA</item>
+        <item>CENTIMETER</item>
+        <item>METER</item>
+    </string-array>
+    <string-array name="weight_array">
+        <item>PARAMANU</item>
+        <item>DHAVANSHI(VANSI and TRASRENU)</item>
+        <item>MARICHI</item>
+        <item>LAL SARSHAP</item>
+        <item>TUNDAL</item>
+        <item>DHANYAMASH</item>
+        <item>YAVA</item>
+        <item>RATTI</item>
+        <item>ANDIKA</item>
+        <item>MASHAK (MASA)</item>
+        <item>SHAAN</item>
+        <item>KOL</item>
+        <item>TOLA</item>
+        <item>MILIGRAM</item>
+        <item>GRAM</item>
+        <item>KILOGRAM</item>
     </string-array>
 </resources>
