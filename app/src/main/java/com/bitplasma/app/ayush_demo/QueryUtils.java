@@ -46,6 +46,7 @@ public class QueryUtils {
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
         try {
+           // Log.e(LOG_TAG, requestUrl);
             jsonResponse = makeHttpRequest(url);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
@@ -67,7 +68,7 @@ public class QueryUtils {
      */
     private static Ayurveda extractFeatureFromJson(String AyurvedaJSON) {
         Log.i(LOG_TAG,"TEST: extractFeatuere called");
-        Ayurveda resAyur=new Ayurveda(0,0,"","");
+        Ayurveda resAyur=new Ayurveda("","","");
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(AyurvedaJSON)) {
             return null;
@@ -81,6 +82,7 @@ public class QueryUtils {
         try {
 
             // Create a JSONObject from the JSON response string
+            Log.i(LOG_TAG,"I m here");
             JSONObject baseJsonResponse = new JSONObject(AyurvedaJSON);
 
             // Extract the JSONArray associated with the key called "features",
@@ -90,20 +92,20 @@ public class QueryUtils {
             // For each earthquake in the earthquakeArray, create an {@link Earthquake} object
 
                 // Extract the value for the key called "mag"
-                long userId = baseJsonResponse.getLong("userId");
+
 
                 // Extract the value for the key called "place"
-                long id = baseJsonResponse.getLong("id");
+                String name = baseJsonResponse.getString("name");
 
                 // Extract the value for the key called "time"
-                String title = baseJsonResponse.getString("title");
+                String comapany = baseJsonResponse.getString("company");
 
                 // Extract the value for the key called "url"
-                String body = baseJsonResponse.getString("body");
+                String ingredients = baseJsonResponse.getString("ingredients");
 
                 // Create a new {@link Earthquake} object with the magnitude, location, time,
                 // and url from the JSON response.
-               Ayurveda ayurvedas = new Ayurveda(userId, id, title, body);
+               Ayurveda ayurvedas = new Ayurveda(name,comapany,ingredients);
                 resAyur=ayurvedas;
             //Log.i(LOG_TAG,resAyur.getmTitle());
             } catch (JSONException e1) {

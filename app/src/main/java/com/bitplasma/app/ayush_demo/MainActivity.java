@@ -7,13 +7,17 @@ import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
 import com.google.android.gms.vision.barcode.Barcode;
+
+import static com.bitplasma.app.ayush_demo.BarcodeScan.LOG_TAG;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton barcode, speech, calculator;
@@ -59,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
                     @Override
                     public void onResult(Barcode barcode) {
-                        Intent intent = new Intent(MainActivity.this, BarcodeScan.class).putExtra("barcode", barcode);
+                        Toast.makeText(getBaseContext(),barcode.rawValue,Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, BarcodeScan.class).putExtra("barcode", barcode.rawValue);
                         startActivity(intent);
                         //barcodeResult = barcode;
                         // result.setText(barcode.rawValue);

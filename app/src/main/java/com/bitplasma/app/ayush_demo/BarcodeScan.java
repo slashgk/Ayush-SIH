@@ -30,18 +30,18 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
     public static final String BARCODE_KEY = "BARCODE";
     private static final int AYUSH_LOADER_ID = 1;
     private static final String AYUSH_REQUEST_URL =
-            "https://jsonplaceholder.typicode.com/posts/1";
+            "http://18.220.214.137/?barcode=";
     private Barcode barcodeResult;
+    private String barcode;
     public static final String LOG_TAG = BarcodeScan.class.getName();
     private TextView result;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_scan);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        String barcode= getIntent().getStringExtra("barcode");
+        barcode= getIntent().getStringExtra("barcode");
         result = (TextView) findViewById(R.id.barcodeResult);
        // final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assertNotNull(result);
@@ -50,7 +50,6 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
         if(savedInstanceState != null){
             Barcode restoredBarcode = savedInstanceState.getParcelable(BARCODE_KEY);
             if(restoredBarcode != null){
-                result.setText(restoredBarcode.rawValue);
                 barcodeResult = restoredBarcode;
             }
         }
@@ -73,6 +72,8 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
+            //Bundle bundle = new Bundle();
+           // bundle.putString("barc",barcodeResult.toString());
             loaderManager.initLoader(AYUSH_LOADER_ID, null, BarcodeScan.this);
         }
         else {
@@ -96,7 +97,8 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
 
     @Override
     public Loader<Ayurveda> onCreateLoader(int i, Bundle bundle) {
-        return new AyurvedaLoader(this, AYUSH_REQUEST_URL);
+        //String barc=bundle.getString("barc");
+        return new AyurvedaLoader(this, AYUSH_REQUEST_URL+barcode);
     }
 
     @Override
@@ -104,7 +106,7 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
         if (ayurveda != null) {
-            result.setText(ayurveda.getmTitle());
+            result.setText(ayurveda.getmName());
         }
         else
             result.setText("No details");

@@ -5,23 +5,20 @@ package com.bitplasma.app.ayush_demo;
  */
 
 public class Ayurveda {
-    private long mUserId;
-    private long mId;
-    private String mTitle;
-    private String mBody;
+    private String mName;
+    private String mCompany;
+    private String mIngredients;
 
-    public Ayurveda(long userId,long id,String title, String body) {
-        mUserId=userId;
-        mId=id;
-        mTitle=title;
-        mBody=body;
+    public Ayurveda(String name,String company,String ingredients) {
+        mName=name;
+        mCompany=company;
+        mIngredients=ingredients;
     }
-    public long getmUserId(){
-        return mUserId;
+    public String getmName(){
+        return mName;
     }
-    public long getmId(){
-        return mId;
+    public String getmCompany(){
+        return mCompany;
     }
-    public String getmTitle() { return mTitle;}
-    public String getmBody(){return mBody;}
+    public String getmIngredients() { return mIngredients;}
 }
