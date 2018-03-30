@@ -63,6 +63,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Scan Barcode"
+            style="@style/sectionHeader"
             android:textColor="@color/color1" />
 
         <TextView
@@ -71,6 +72,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Speech to Text"
+            style="@style/sectionHeader"
             android:textColor="@color/color1" />
 
         <TextView
@@ -79,6 +81,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            style="@style/sectionHeader"
             android:text="Converter"
             android:textColor="@color/color1" />
     </LinearLayout>
