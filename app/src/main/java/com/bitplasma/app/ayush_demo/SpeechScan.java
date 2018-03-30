@@ -20,13 +20,16 @@ import com.github.zagum.speechrecognitionview.adapters.RecognitionListenerAdapte
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SpeechScan extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final int REQUEST_RECORD_AUDIO_PERMISSION_CODE = 1;
     EditText otext;
     TextView ctext;
+    Button bt;
     private SpeechRecognizer speechRecognizer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,50 @@ public class SpeechScan extends AppCompatActivity {
             public void onClick(View v) {
                 recognitionProgressView.stop();
                 recognitionProgressView.play();
+            }
+        });
+        bt = (Button)findViewById(R.id.convert_speech);
+        bt.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                String inp_text=otext.getText().toString();
+                String[] inp_ary = inp_text.split(" ");
+                for(int i=0;i<inp_ary.length;i++){
+                    for(int j=0;j<UnitValues.time_units.length;j++){
+                        inp_ary[i]=inp_ary[i].toUpperCase();
+                        if(inp_ary[i].equals(UnitValues.time_units[j])&&i!=0){
+                            new DecimalFormat("#.##").format(UnitValues.time_values[j]);
+                            double insec=Double.parseDouble(inp_ary[i-1])*UnitValues.time_values[j];
+                            inp_ary[i-1]=Double.toString(insec);
+                            inp_ary[i]="SECOND ";
+                        }
+                    }
+                    for(int j=0;j<UnitValues.weight_units.length;j++){
+                        inp_ary[i]=inp_ary[i].toUpperCase();
+                        if(inp_ary[i].equals(UnitValues.weight_units[j])&&i!=0){
+                            new DecimalFormat("#.##").format(UnitValues.weight_values[j]);
+                            double insec=Double.parseDouble(inp_ary[i-1])*UnitValues.weight_values[j];
+                            inp_ary[i-1]=Double.toString(insec);
+                            inp_ary[i]="MILIGRAM ";
+                        }
+                    }
+                    for(int j=0;j<UnitValues.length_units.length;j++){
+                        inp_ary[i]=inp_ary[i].toUpperCase();
+                        if(inp_ary[i].equals(UnitValues.length_units[j])&&i!=0){
+                            new DecimalFormat("#.##").format(UnitValues.length_values[j]);
+                            double insec=Double.parseDouble(inp_ary[i-1])*UnitValues.length_values[j];
+                            inp_ary[i-1]=Double.toString(insec);
+                            inp_ary[i]="CENTIMETER ";
+                        }
+                    }
+                }
+                StringBuilder builder = new StringBuilder();
+                for(String s : inp_ary) {
+                    builder.append(s+" ");
+                }
+                String str = builder.toString();
+                ctext.setText(str);
             }
         });
     }

@@ -70,14 +70,14 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="65dp"
         android:hint="Speak!"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/convert_speech"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/convert_speech"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="54dp"
@@ -96,11 +96,12 @@
         android:layout_marginStart="6dp"
         android:background="@drawable/back"
         android:hint="Result"
-        android:textSize="25dp"
+        android:textColor="#000000"
+        android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/recognition_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/convert_speech" />
 
 </android.support.constraint.ConstraintLayout>

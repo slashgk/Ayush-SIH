@@ -34,7 +34,7 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
     private Barcode barcodeResult;
     private String barcode;
     public static final String LOG_TAG = BarcodeScan.class.getName();
-    private TextView result;
+    private TextView name,company,ingredients;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +42,11 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         barcode= getIntent().getStringExtra("barcode");
-        result = (TextView) findViewById(R.id.barcodeResult);
+        name = (TextView) findViewById(R.id.ayur_name);
+        company = (TextView) findViewById(R.id.ayur_company);
+        ingredients = (TextView) findViewById(R.id.ayur_ingredients);
        // final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        assertNotNull(result);
+
        // assertNotNull(fab);
         networkCall(barcode);
         if(savedInstanceState != null){
@@ -83,7 +85,7 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
             loadingIndicator.setVisibility(View.GONE);
 
             // Update empty state with no connection error message
-            result.setText(R.string.no_internet_connection);
+            name.setText(R.string.no_internet_connection);
         }
     }
 
@@ -105,15 +107,19 @@ public class BarcodeScan extends AppCompatActivity implements LoaderManager.Load
     public void onLoadFinished(Loader<Ayurveda> loader, Ayurveda ayurveda) {
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
-        if (ayurveda != null) {
-            result.setText(ayurveda.getmName());
+        if (ayurveda == null||ayurveda.getmName().equals("No details")) {
+            name.setText("No details");
         }
-        else
-            result.setText("No details");
+        else{
+            name.setText("Name: "+ayurveda.getmName());
+            company.setText("Company: "+ayurveda.getmCompany());
+            ingredients.setText("Ingredients: \n"+ayurveda.getmIngredients());
+        }
+
     }
 
     @Override
     public void onLoaderReset(Loader<Ayurveda> loader) {
-        result.setText("");
+        name.setText("");
     }
 }
