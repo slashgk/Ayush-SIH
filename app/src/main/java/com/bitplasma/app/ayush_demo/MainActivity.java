@@ -9,20 +9,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
 import com.google.android.gms.vision.barcode.Barcode;
 
 public class MainActivity extends AppCompatActivity {
-    Button barcode, speech, calculator;
+    ImageButton barcode, speech, calculator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        barcode=(Button)findViewById(R.id.barcode);
-        speech=(Button)findViewById(R.id.voice);
-        calculator=(Button)findViewById(R.id.calculator);
+        barcode=(ImageButton)findViewById(R.id.barcode);
+        speech=(ImageButton)findViewById(R.id.voice);
+        calculator=(ImageButton)findViewById(R.id.calculator);
         barcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SpeechScan.class);
+                startActivity(intent);
+            }
+        });
+        calculator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Calculator.class);
                 startActivity(intent);
             }
         });
