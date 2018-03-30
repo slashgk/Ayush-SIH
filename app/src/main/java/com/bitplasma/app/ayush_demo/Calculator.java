@@ -75,71 +75,74 @@ public class Calculator extends AppCompatActivity {
                 }
             }
         });
-        converter.setOnClickListener(new Button.OnClickListener()
-        {
+            converter.setOnClickListener(new Button.OnClickListener()
+             {
 
             @Override
             public void onClick(View view) {
-                double input=Double.valueOf(inp.getText().toString());
-                String inp_unit=sp1.getSelectedItem().toString();
-                String out_unit=sp2.getSelectedItem().toString();
-                int selectedId = rg.getCheckedRadioButtonId();
-                RadioButton radioButton = (RadioButton) findViewById(selectedId);
-                Log.e(LOG_TAG,"1");
-                String rad=radioButton.getText().toString();
-                if(rad.equals("Time")){
-                    int i=0;
-                    for(i=0;i<UnitValues.time_units.length;i++){
-                        if(inp_unit.equals(UnitValues.time_units[i])){
-                            break;
-                        }
-                    }
-                    Log.e(LOG_TAG,Integer.valueOf(i).toString());
-                    double seconds = input*UnitValues.time_values[i];
-                    Log.e(LOG_TAG,"3");
-                    for(i=0;i<UnitValues.time_units.length;i++){
-                        if(out_unit.equals(UnitValues.time_units[i])){
-                            break;
-                        }
-                    }
-                    double out_unitss = seconds/UnitValues.time_values[i];
-                    output.setText(BigDecimal.valueOf(out_unitss).toPlainString());
+                if (inp.getText().toString().equals("")) {
+                    Toast.makeText(getBaseContext(),"Enter Value",Toast.LENGTH_SHORT).show();
                 }
-                else  if(rad.equals("Length")){
-                    int i=0;
-                    for(i=0;i<UnitValues.length_units.length;i++){
-                        if(inp_unit.equals(UnitValues.length_units[i])){
-                            break;
+                else{
+                    double input = Double.valueOf(inp.getText().toString());
+                    String inp_unit = sp1.getSelectedItem().toString();
+                    String out_unit = sp2.getSelectedItem().toString();
+                    int selectedId = rg.getCheckedRadioButtonId();
+                    RadioButton radioButton = (RadioButton) findViewById(selectedId);
+                    Log.e(LOG_TAG, "1");
+                    String rad = radioButton.getText().toString();
+                    if (rad.equals("Time")) {
+                        int i = 0;
+                        for (i = 0; i < UnitValues.time_units.length; i++) {
+                            if (inp_unit.equals(UnitValues.time_units[i])) {
+                                break;
+                            }
                         }
-                    }
-                    Log.e(LOG_TAG,Integer.valueOf(i).toString());
-                    double seconds = input*UnitValues.length_values[i];
-                    Log.e(LOG_TAG,"3");
-                    for(i=0;i<UnitValues.time_units.length;i++){
-                        if(out_unit.equals(UnitValues.length_units[i])){
-                            break;
+                        Log.e(LOG_TAG, Integer.valueOf(i).toString());
+                        double seconds = input * UnitValues.time_values[i];
+                        Log.e(LOG_TAG, "3");
+                        for (i = 0; i < UnitValues.time_units.length; i++) {
+                            if (out_unit.equals(UnitValues.time_units[i])) {
+                                break;
+                            }
                         }
-                    }
-                    double out_unitss = seconds/UnitValues.length_values[i];
-                    output.setText(BigDecimal.valueOf(out_unitss).toPlainString());
-                }
-                else  if(rad.equals("Weight")){
-                    int i=0;
-                    for(i=0;i<UnitValues.weight_units.length;i++){
-                        if(inp_unit.equals(UnitValues.weight_units[i])){
-                            break;
+                        double out_unitss = seconds / UnitValues.time_values[i];
+                        output.setText(BigDecimal.valueOf(out_unitss).toPlainString());
+                    } else if (rad.equals("Length")) {
+                        int i = 0;
+                        for (i = 0; i < UnitValues.length_units.length; i++) {
+                            if (inp_unit.equals(UnitValues.length_units[i])) {
+                                break;
+                            }
                         }
-                    }
-                    Log.e(LOG_TAG,Integer.valueOf(i).toString());
-                    double seconds = input*UnitValues.weight_values[i];
-                    Log.e(LOG_TAG,"3");
-                    for(i=0;i<UnitValues.time_units.length;i++){
-                        if(out_unit.equals(UnitValues.weight_units[i])){
-                            break;
+                        Log.e(LOG_TAG, Integer.valueOf(i).toString());
+                        double seconds = input * UnitValues.length_values[i];
+                        Log.e(LOG_TAG, "3");
+                        for (i = 0; i < UnitValues.time_units.length; i++) {
+                            if (out_unit.equals(UnitValues.length_units[i])) {
+                                break;
+                            }
                         }
+                        double out_unitss = seconds / UnitValues.length_values[i];
+                        output.setText(BigDecimal.valueOf(out_unitss).toPlainString());
+                    } else if (rad.equals("Weight")) {
+                        int i = 0;
+                        for (i = 0; i < UnitValues.weight_units.length; i++) {
+                            if (inp_unit.equals(UnitValues.weight_units[i])) {
+                                break;
+                            }
+                        }
+                        Log.e(LOG_TAG, Integer.valueOf(i).toString());
+                        double seconds = input * UnitValues.weight_values[i];
+                        Log.e(LOG_TAG, "3");
+                        for (i = 0; i < UnitValues.time_units.length; i++) {
+                            if (out_unit.equals(UnitValues.weight_units[i])) {
+                                break;
+                            }
+                        }
+                        double out_unitss = seconds / UnitValues.weight_values[i];
+                        output.setText(BigDecimal.valueOf(out_unitss).toPlainString());
                     }
-                    double out_unitss = seconds/UnitValues.weight_values[i];
-                    output.setText(BigDecimal.valueOf(out_unitss).toPlainString());
                 }
             }
         });
