@@ -48,42 +48,71 @@
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="375dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="314dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="29dp"
         android:layout_marginEnd="5dp"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="206dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            style="@style/sectionHeader"
             android:layout_width="57dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Scan Barcode"
-            style="@style/sectionHeader"
             android:textColor="@color/color1" />
 
         <TextView
+            style="@style/sectionHeader"
             android:layout_width="57dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Speech to Text"
-            style="@style/sectionHeader"
             android:textColor="@color/color1" />
 
         <TextView
             android:id="@+id/textView3"
+            style="@style/sectionHeader"
             android:layout_width="57dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            style="@style/sectionHeader"
             android:text="Converter"
+            android:textColor="@color/color1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="123dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="115dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+        <ImageButton
+            android:id="@+id/img_recog"
+            android:layout_width="match_parent"
+            android:layout_height="141dp"
+            app:srcCompat="@drawable/imgtotext" />
+
+        <TextView
+            android:id="@+id/imgtotxt"
+            style="@style/sectionHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="Image to Text"
             android:textColor="@color/color1" />
     </LinearLayout>
 

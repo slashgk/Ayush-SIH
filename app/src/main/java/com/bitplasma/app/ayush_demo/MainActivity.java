@@ -20,7 +20,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import static com.bitplasma.app.ayush_demo.BarcodeScan.LOG_TAG;
 
 public class MainActivity extends AppCompatActivity {
-    ImageButton barcode, speech, calculator;
+    ImageButton barcode, speech, calculator,imageRecog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         barcode=(ImageButton)findViewById(R.id.barcode);
         speech=(ImageButton)findViewById(R.id.voice);
         calculator=(ImageButton)findViewById(R.id.calculator);
+        imageRecog=(ImageButton)findViewById(R.id.img_recog);
         barcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Calculator.class);
+                startActivity(intent);
+            }
+        });
+        imageRecog.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
                 startActivity(intent);
             }
         });
