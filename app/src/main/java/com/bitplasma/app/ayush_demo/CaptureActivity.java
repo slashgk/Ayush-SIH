@@ -59,6 +59,7 @@ import com.googlecode.tesseract.android.TessBaseAPI;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import com.bitplasma.app.ayush_demo.camera.CameraManager;
 import com.bitplasma.app.ayush_demo.camera.ShutterButton;
@@ -243,6 +244,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
    
     ocrResultView = (TextView) findViewById(R.id.ocr_result_text_view);
     registerForContextMenu(ocrResultView);
+    //Toast.makeText(getBaseContext(),ocrResultView.getText(),Toast.LENGTH_SHORT).show();
     translationView = (TextView) findViewById(R.id.translation_text_view);
     registerForContextMenu(translationView);
     
@@ -726,7 +728,44 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
       toast.show();
       return false;
     }
-    
+    String inp_text=ocrResult.getText();
+    String[] inp_ary = inp_text.split(" ");
+    for(int i=0;i<inp_ary.length;i++){
+      for(int j=0;j<UnitValues.time_units.length;j++){
+        inp_ary[i]=inp_ary[i].toUpperCase();
+        if(inp_ary[i].equals(UnitValues.time_units[j])&&i!=0){
+          new DecimalFormat("#.##").format(UnitValues.time_values[j]);
+          double insec=Double.parseDouble(inp_ary[i-1])*UnitValues.time_values[j];
+          inp_ary[i-1]=Double.toString(insec);
+          inp_ary[i]="SECOND ";
+        }
+      }
+      for(int j=0;j<UnitValues.weight_units.length;j++){
+        inp_ary[i]=inp_ary[i].toUpperCase();
+        if(inp_ary[i].equals(UnitValues.weight_units[j])&&i!=0){
+          new DecimalFormat("#.##").format(UnitValues.weight_values[j]);
+          double insec=Double.parseDouble(inp_ary[i-1])*UnitValues.weight_values[j];
+          inp_ary[i-1]=Double.toString(insec);
+          inp_ary[i]="MILIGRAM ";
+        }
+      }
+      for(int j=0;j<UnitValues.length_units.length;j++){
+        inp_ary[i]=inp_ary[i].toUpperCase();
+        if(inp_ary[i].equals(UnitValues.length_units[j])&&i!=0){
+          new DecimalFormat("#.##").format(UnitValues.length_values[j]);
+          double insec=Double.parseDouble(inp_ary[i-1])*UnitValues.length_values[j];
+          inp_ary[i-1]=Double.toString(insec);
+          inp_ary[i]="CENTIMETER ";
+        }
+      }
+    }
+    StringBuilder builder = new StringBuilder();
+    for(String s : inp_ary) {
+      builder.append(s+" ");
+    }
+    String str = builder.toString();
+    Toast.makeText(getBaseContext(),str,Toast.LENGTH_SHORT).show();
+    ocrResult.setText(inp_text+"\n"+str);
     // Turn off capture-related UI elements
     shutterButton.setVisibility(View.GONE);
     statusViewBottom.setVisibility(View.GONE);
@@ -879,6 +918,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
                                   ContextMenuInfo menuInfo) {
     super.onCreateContextMenu(menu, v, menuInfo);
     if (v.equals(ocrResultView)) {
+      Toast.makeText(getBaseContext(),ocrResultView.getText(),Toast.LENGTH_SHORT).show();
       menu.add(Menu.NONE, OPTIONS_COPY_RECOGNIZED_TEXT_ID, Menu.NONE, "Copy recognized text");
       menu.add(Menu.NONE, OPTIONS_SHARE_RECOGNIZED_TEXT_ID, Menu.NONE, "Share recognized text");
     } else if (v.equals(translationView)){
